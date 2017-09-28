@@ -1,4 +1,4 @@
-require('../db.js');
+require('../backend/components/dbSchemas');
 const etherUnits = require("../backend/libs/etherUnits.js");
 const BigNumber = require('bignumber.js');
 
