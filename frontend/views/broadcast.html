@@ -1,0 +1,28 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12 portlet light">
+        <div class="portlet-body">
+            <div class="row">
+                <div class="page-title margin-bottom-20">
+                    <h2>
+                        <span>Broadcast TX</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <form>
+                <label for="tx_input">Put your tx here</label>
+                <textarea id="tx_input" class="tx_input" rows="5" cols="2" ng-model="rawTx"></textarea>
+                <div class="btn btn-success" ng-click="sendRawTx()" ng-disabled="!rawTx">Broadcast</div>
+                <div class="margin-top-20" ng-if="error">
+                    <div class="alert alert-warning" ng-if="error === 400">Bad TX body</div>
+                    <div class="alert alert-danger" ng-if="error === 520">Failed to send transaction into network, although it looked valid</div>
+                    <div class="alert alert-danger" ng-if="error !== 400 && error !== 520">Unexpected error</div>
+                </div>
+            </form>
+        </div>
+
+    </div><!--end row-->
+</div><!--end portlet-body-->

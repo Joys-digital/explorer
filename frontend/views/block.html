@@ -1,0 +1,63 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="page-title margin-bottom-20">
+        <h2>
+            <span>Block</span>
+            <span>#{{blockNum}}</span>
+        </h2>
+    </div>
+  <div class="col-md-12 portlet light">
+      <div class="portlet-body">
+
+        <table class="col-md-6 table table-hover">
+          <tr ><td width="25%">height</td><td>{{block.number}}</td></tr>
+          <tr ><td width="25%">Time</td>
+                <td>{{block.datetime | date:'yyyy-MM-dd HH:mm:ss Z' }} ({{block.timestamp | timeDuration}} ago)</td>
+          </tr>
+          <tr ><td width="25%">Hash</td><td>{{block.hash}}</td></tr>
+          <tr ><td width="25%">parentHash</td><td><a href="/block/{{block.number - 1}}">{{block.parentHash}}</td></tr>
+          <tr ><td width="25%">sha3 Uncles</td><td>{{block.sha3Uncles}}</td></tr>
+          <tr ><td width="25%">Mined By</td><td><a href="/addr/{{block.miner}}">{{block.miner}}</td></tr>
+          <tr ><td width="25%">Difficulty</td><td>{{block.difficulty | totalDifficulty}}</td></tr>
+          <tr ><td width="25%">Total Difficulty</td><td>{{block.totalDifficulty | teraHashes | number}} TH</td></tr>
+          <tr ><td width="25%">Gas Limit</td><td>{{block.gasLimit | number}}</td></tr>
+          <tr ><td width="25%">Gas Used</td><td>{{block.gasUsed | number}}</td></tr>
+          <tr ><td width="25%">nonce</td><td>{{block.nonce}}</td></tr>
+          <tr ><td width="25%">Extra Data</td><td>{{block.extraData}}</td></tr>
+        </table>
+    </div>
+    <!--TODO: calculate block reward -->
+
+  </div>
+    <!-- Begin: Transaction Datatable -->
+  <div class="portlet light portlet-datatable col-md-12">
+     <div class="portlet-body" ng-if="transactions.length>0">
+
+         <table class="table table-striped table-hover" id="table_txs"
+                style="table-layout:fixed;width: 98% !important;">
+             <thead>
+             <tr role="row" class="heading">
+                 <th width="25%">TxHash</th>
+                 <th width="5%">Block</th>
+                 <th width="25%">From</th>
+                 <th width="25%">To</th>
+                 <th width="10%">SHF</th>
+                 <th width="10%">Gas</th>
+             </tr>
+             </thead>
+             <tbody>
+             <div>
+                 <tr ng-repeat="tx in transactions track by $index">
+                     <td width="15%"><a ui-sref="tx({hash: '{{tx.hash}}'})">{{tx.hash}}</a></td>
+                     <td width="8%">{{tx.blockNumber}}</td>
+                     <td width="15%"><a ui-sref="address({hash:'{{tx.from}}'})">{{tx.from}}</a></td>
+                     <td width="15%"><a ui-sref="address({hash:'{{tx.to}}'})">{{tx.to}}</a></td>
+                     <td width="10%">{{tx.value | fromWeiToEther}}</td>
+                     <td width="0%">{{tx.gas}}</td>
+                 </tr>
+             </div>
+             </tbody>
+         </table>
+      </div>
+    </div><!-- End: portlet -->
+</div>

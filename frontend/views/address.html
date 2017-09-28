@@ -1,0 +1,80 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12 portlet light">
+        <div class="portlet-body">
+            <div class="row">
+                <div class="page-title margin-bottom-20">
+                    <h2>
+                        <span>Address</span>
+                        <small>{{addrHash}}</small>
+                    </h2>
+                </div>
+                <span>
+                  {{ address.balance }}
+                </span>
+                <span class="eth-stat-text">
+                  Shaft Balance
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right"
+                       title="Note: Balance may not reflect fresh transactions have been made."></i>
+                  </span>
+                <div class="margin-top-20">
+                    {{ address.txCount }} <span class="eth-stat-text">Transactions</span>
+                </div>
+            </div>
+        </div>
+
+    </div><!--end row-->
+</div><!--end portlet-body-->
+</div><!--end portlet-->
+
+<!-- Begin: Transaction Datatable -->
+<div class="portlet light portlet-datatable col-md-12">
+    <div class="portlet-body">
+        <div class="tabbable-line">
+            <ul class="nav nav-tabs ">
+                <li ng-class="{active: activeTab == 'tab_addr_1' || !activeTab}">
+                    <a href="#tab_addr_1" data-toggle="tab" aria-expanded="true"> Transactions </a>
+                </li>
+                <li ng-class="{active: activeTab == 'tab_addr_2'}" ng-show="addr.isContract">
+                    <a href="#tab_addr_2" data-toggle="tab" aria-expanded="false"> Internal Transactions </a>
+                </li>
+                <li class="" ng-show="addr.isContract" ng-class="{active: activeTab == 'tab_addr_3'}">
+                    <a href="#tab_addr_3" data-toggle="tab" aria-expanded="false"> Contract Source </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane table-container" ng-class="{active: activeTab == 'tab_addr_1' || !activeTab}"
+                     id="tab_addr_1">
+                    <table class="table table-striped table-hover" id="table_txs"
+                           style="table-layout:fixed;width: 98% !important;">
+                        <thead>
+                        <tr role="row" class="heading">
+                            <th width="25%">TxHash</th>
+                            <th width="5%">Block</th>
+                            <th width="25%">From</th>
+                            <th width="25%">To</th>
+                            <th width="10%">SHF</th>
+                            <th width="10%">Gas</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div ng-if="transactions.length>0">
+                            <tr ng-repeat="tx in getTransactions() track by $index">
+                                <td width="15%"><a ui-sref="tx({hash: '{{tx.hash}}'})">{{tx.hash}}</a></td>
+                                <td width="8%"><a ui-sref="block({number: '{{tx.blockNumber}}'})">{{tx.blockNumber}}</a> </td>
+                                <td width="15%"><a ui-sref="address({hash: '{{tx.from}}'})">{{tx.from}}</a></td>
+                                <td width="15%"><a ui-sref="address({hash: '{{tx.to}}'})">{{tx.to}}</a><</td>
+                                <td width="10%">{{tx.value | fromWeiToEther}}</td>
+                                <td width="0%">{{tx.gas}}</td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                    <div class="btn btn-info" ng-if="address.transactions.length >= 20 && txLimit != -1" ng-click="loadTxs(20)">Load 20 more</div>
+                    <div class="btn btn-info" data-toggle="tooltip" title="Warning: If address have too many transactions, browser may lag on loading" ng-if="address.transactions.length >= 20" ng-click="loadTxs(-1)">Load all</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div><!-- End: portlet -->

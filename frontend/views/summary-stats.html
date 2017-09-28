@@ -1,0 +1,101 @@
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-green-sharp">
+                        <small class="font-green-sharp">$</small>
+                        <span data-counter="counterup">N/A</span>
+                    </h3>
+                    <small>Shaft Price</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-fire"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: 0%;" class="progress-bar progress-bar-success green-sharp">
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title">Shaft USD Price</div>
+                    <div class="status-number">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-red-haze">
+                        <span data-counter="counterup" data-value="stats.hashrate">{{stats.hashrate | totalDifficulty}}/s</span>
+                    </h3>
+                    <small>Shaft Avg Hashrate</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-wrench"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: {{stats.hashrateChange24hr}}%;" class="progress-bar progress-bar-success red-haze">
+                    </span>
+                </div>
+                <div class="status">
+                    <div class="status-title">Hashrate change 24hr</div>
+                    <div class="status-number"> {{stats.hashrateChange24hr}}% </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-blue-sharp">
+                        <span data-counter="counterup" data-value="{{stats.difficulty}}">{{stats.difficulty | totalDifficulty}}</span>
+                    </h3>
+                    <small>DIFFICULTY</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-puzzle"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: {{stats.difficulty24hrChange}}%;" class="progress-bar progress-bar-success blue-sharp"></span>
+                </div>
+                <div class="status">
+                    <div class="status-title">Difficulty change 24hr</div>
+                    <div class="status-number"> {{stats.difficulty24hrChange}}% </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat2 ">
+            <div class="display">
+                <div class="number">
+                    <h3 class="font-purple-soft">
+                        <span data-counter="counterup" data-value="{{stats.blocktime}}">{{stats.blocktime}} Seconds</span>
+                    </h3>
+                    <small>BLOCK TIME</small>
+                </div>
+                <div class="icon">
+                    <i class="icon-hourglass"></i>
+                </div>
+            </div>
+            <div class="progress-info">
+                <div class="progress">
+                    <span style="width: {{stats.blocktime24hrChange}}%;" class="progress-bar progress-bar-success purple-soft"></span>
+                </div>
+                <div class="status">
+                    <div class="status-title">Blocktime change 24hr</div>
+                    <div class="status-number"> {{stats.blocktime24hrChange}}% </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
