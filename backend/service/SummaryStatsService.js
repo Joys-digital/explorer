@@ -19,7 +19,7 @@ function getBlocktime(hours) {
         let now = Math.floor(Date.now() / 1000);
         let nowMinusHour = now - 60 * 60 * hours;
 
-        Block.find({timestamp: {$gt: nowMinusHour}}).exec(function (err, b) {
+        Block.find({timestamp: {$gt: nowMinusHour}}).lean(true).exec(function (err, b) {
             if (err) {
                 reject(err);
             } else {
@@ -59,7 +59,7 @@ function getDifficulty(hours) {
         if (hours != null) {
             let now = Math.floor(Date.now() / 1000);
             let nowMinusHour = now - 60 * 60 * hours;
-            Block.find({timestamp: {$lt: nowMinusHour}}).sort('-number').limit(1).exec(function (err, blocks) {
+            Block.find({timestamp: {$lt: nowMinusHour}}).sort('-number').limit(1).lean(true).exec(function (err, blocks) {
                 if (err) {
                     reject();
                 } else {
@@ -71,7 +71,7 @@ function getDifficulty(hours) {
                 }
             })
         } else {
-            Block.find().limit(1).sort('-number').exec(function (err, blocks) {
+            Block.find().limit(1).sort('-number').lean(true).exec(function (err, blocks) {
                 if (err) {
                     reject();
                 } else {

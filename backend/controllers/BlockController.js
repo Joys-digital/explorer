@@ -15,7 +15,7 @@ exports.getBlock = function (req, res) {
 
     if (isBlockNumber) {
         let blockNumber = parseInt(blockNumberOrHash);
-        let blockFind = Block.findOne({number: blockNumber});
+        let blockFind = Block.findOne({number: blockNumber}).lean(true);
         blockFind.exec(function (err, doc) {
             if (err) {
                 console.log('Error', err, doc);
@@ -47,7 +47,7 @@ exports.getBlock = function (req, res) {
 
     if (isBlockHash) {
         let blockHash = blockNumberOrHash;
-        let blockFind = Block.findOne({hash: blockHash});
+        let blockFind = Block.findOne({hash: blockHash}).lean(true);
         blockFind.exec(function (err, doc) {
             if (err) {
                 console.log('Error', err, doc);
@@ -85,7 +85,7 @@ exports.getBlock = function (req, res) {
 
 exports.getLatestBlocks = function (req, res) {
 
-    Block.find().limit(10).sort({$natural: -1}).exec(function (err, blocks) {
+    Block.find().limit(10).sort({$natural: -1}).lean(true).exec(function (err, blocks) {
         if (err) {
             res.status(500).send();
             res.end();
