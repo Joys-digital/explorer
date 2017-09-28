@@ -29,3 +29,13 @@ Edit constants in grabber.js if you have different hostname and port for local g
 `node ./tools/grabber.js`
 
 Leave this running in the background to continuously fetch new blocks.
+
+## Run the application
+
+This will delploy application on 3000 port
+
+### Run:
+
+`node app.js`
+
+Open http://127.0.0.1:3000/ to open shaft explorer
