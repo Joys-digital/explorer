@@ -6,11 +6,13 @@ const fs = require('fs');
 
 const Web3 = require('web3');
 
+const baseUrl = "http://localhost";
+const port = 8545;
+
 const mongoose = require('mongoose');
 const Block = mongoose.model('Block');
 const Transaction = mongoose.model('Transaction');
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:' +
-    8545));
+const web3 = new Web3(new Web3.providers.HttpProvider(baseUrl + ":" + port));
 
 let started = false;
 let initialized = false;
