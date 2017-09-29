@@ -28,7 +28,7 @@ function getBalance(address) {
     return new Promise((resolve, reject) => {
         web3.eth.getBalance(address, function (err, result) {
             if (err) {
-                reject();
+                reject(err);
             } else {
                 resolve(result);
             }
@@ -41,7 +41,7 @@ function sendRawTx(tx) {
     return new Promise((resolve, reject) => {
         web3.eth.sendRawTransaction(tx, function (err, hash) {
             if (err) {
-                reject()
+                reject(err)
             }
             else {
                 resolve(hash)
