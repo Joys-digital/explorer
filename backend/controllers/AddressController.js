@@ -33,6 +33,7 @@ exports.getAddress = function (req, res) {
                     }));
                     res.end();
                 }, function (error) {
+                    console.log('Could not find address balance:', error);
                     res.write(JSON.stringify({
                         address: address,
                         balance: "N/A",
