@@ -70,8 +70,7 @@
                         </div>
                         </tbody>
                     </table>
-                    <div class="btn btn-info" ng-if="address.transactions.length >= 20 && txLimit != -1" ng-click="loadTxs(20)">Load 20 more</div>
-                    <div class="btn btn-info" data-toggle="tooltip" title="Warning: If address have too many transactions, browser may lag on loading" ng-if="address.transactions.length >= 20" ng-click="loadTxs(-1)">Load all</div>
+                    <div class="btn btn-info" ng-if="address.transactions.length >= 20 && txLimit <= address.transactions.length" ng-click="loadTxs(20)">Load 20 more</div>
                 </div>
             </div>
         </div>

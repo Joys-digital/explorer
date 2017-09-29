@@ -30,11 +30,7 @@ angular
 
 
     $scope.loadTxs = function (amount) {
-        if (amount == -1) {
-            $scope.txLimit = -1;
-        } else {
-            $scope.txLimit += amount;
-        }
+        $scope.txLimit += amount;
     };
 
     $scope.getTransactions = function () {
@@ -48,11 +44,7 @@ angular
         var sorted = result.sort(function (a, b) {
             return b.blockNumber - a.blockNumber;
         });
-        if ($scope.txLimit == -1) {
-            return sorted.slice(0);
-        }else {
-            return sorted.slice(0, $scope.txLimit);
-        }
+        return sorted.slice(0, $scope.txLimit);
 
     }
 
