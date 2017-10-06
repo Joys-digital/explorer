@@ -11,6 +11,7 @@ const BroadcastController = require('../controllers/BroadcastController');
 
 module.exports = function (app) {
     app.get('/api/address/:address', AddressController.getAddress);
+    app.get('/api/address/:address/mined', AddressController.getMined);
     app.get('/api/tx/:txHash', TxController.getTx);
     app.get('/api/txs/latest', TxController.getLatest);
     app.get('/api/block/:blockNumberOrHash', BlockController.getBlock);
