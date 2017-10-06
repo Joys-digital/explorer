@@ -20,6 +20,12 @@
                 <div class="margin-top-20">
                     {{ address.txCount }} <span class="eth-stat-text">Transactions</span>
                 </div>
+                <div class="margin-top-20" ng-if="mined.length>0">
+                    {{ mined.length }} <span class="eth-stat-text">Block mined</span>
+                </div>
+                <div class="margin-top-20" ng-if="mined.length>0">
+                    {{ getMinedAmount() }} <span class="eth-stat-text">Mined coins</span>
+                </div>
             </div>
         </div>
 

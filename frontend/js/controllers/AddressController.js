@@ -48,6 +48,13 @@ angular
         $scope.minedLimit += amount;
     };
 
+    $scope.getMinedAmount = function () {
+        if ($scope.mined.length > 0) {
+            return $scope.mined.length * 5;
+        }
+        return 0;
+    };
+
     $scope.getMined = function () {
         var result = [];
 
