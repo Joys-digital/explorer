@@ -5,7 +5,7 @@
                 <div class="number">
                     <h3 class="font-green-sharp">
                         <small class="font-green-sharp">$</small>
-                        <span data-counter="counterup">N/A</span>
+                        <span data-counter="counterup">{{stats.price}}</span>
                     </h3>
                     <small>Shaft Price</small>
                 </div>
@@ -15,12 +15,12 @@
             </div>
             <div class="progress-info">
                 <div class="progress">
-                    <span style="width: 0%;" class="progress-bar progress-bar-success green-sharp">
+                    <span style="width: {{stats.priceChange24hr}}%;" class="progress-bar progress-bar-success green-sharp">
                     </span>
                 </div>
                 <div class="status">
                     <div class="status-title">Shaft USD Price</div>
-                    <div class="status-number">0%</div>
+                    <div class="status-number">{{stats.priceChange24hr}}%</div>
                 </div>
             </div>
         </div>

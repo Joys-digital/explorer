@@ -2,7 +2,7 @@
 module.exports = class BlockDTO {
     constructor() {
         this.price = null;
-        this.price24hr = null;
+        this.priceChange24hr = null;
         this.hashrate = null;
         this.hashrate24hr = null;
         this.difficulty = null;

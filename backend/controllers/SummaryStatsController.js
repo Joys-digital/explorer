@@ -26,9 +26,11 @@ exports.getSummaryStats = function (req, res) {
                 difficulty24hr = result;
                 return SummaryStatsService.getDifficulty(1).then(result => {
                     difficulty = result;
-                    let summaryStatsDTO = DTOMapper.mapSummaryStatsToDTO(blocktime, blocktime24hr, difficulty, difficulty24hr);
-                    res.write(JSON.stringify(summaryStatsDTO));
-                    res.end();
+                    return SummaryStatsService.getPrices().then(result => {
+                        let summaryStatsDTO = DTOMapper.mapSummaryStatsToDTO(result, blocktime, blocktime24hr, difficulty, difficulty24hr);
+                        res.write(JSON.stringify(summaryStatsDTO));
+                        res.end();
+                    });
                 })
             })
         });

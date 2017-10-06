@@ -38,10 +38,10 @@ function mapMongooseBlockToDTO(blockModel) {
 }
 
 
-function mapSummaryStatsToDTO(blocktime, blocktime24hr, difficulty, difficulty24hr) {
+function mapSummaryStatsToDTO(prices, blocktime, blocktime24hr, difficulty, difficulty24hr) {
     let summaryStatsDTO = new SummaryStatsDTO();
-    summaryStatsDTO.price = 0;
-    summaryStatsDTO.price24hr = 0;
+    summaryStatsDTO.price = prices.shfBtcRate * prices.btcUsdRate;
+    summaryStatsDTO.priceChange24hr = prices.shfBtcChange;
     summaryStatsDTO.hashrate = difficulty / blocktime;
     summaryStatsDTO.hashrate24hr = (difficulty24hr / blocktime24hr);
     summaryStatsDTO.difficulty = difficulty;

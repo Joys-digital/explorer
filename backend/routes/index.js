@@ -8,6 +8,7 @@ const TxController = require('../controllers/TxController');
 const SummaryStatsController = require('../controllers/SummaryStatsController');
 const AddressController = require('../controllers/AddressController');
 const BroadcastController = require('../controllers/BroadcastController');
+const CoinsController = require('../controllers/CoinsController');
 
 module.exports = function (app) {
     app.get('/api/address/:address', AddressController.getAddress);
@@ -18,6 +19,7 @@ module.exports = function (app) {
     app.get('/api/block/:blockNumberOrHash/transactions', BlockController.getBlockTransactions);
     app.get('/api/blocks/latest', BlockController.getLatestBlocks);
     app.get('/api/stats', SummaryStatsController.getSummaryStats);
+    app.get('/api/coins', CoinsController.getCoinsAmount);
     app.post('/api/broadcast', BroadcastController.broadcast);
 };
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const requestify = require('requestify');
 const Block = mongoose.model('Block');
 const SummaryStats = mongoose.model('SummaryStats');
 
@@ -6,6 +7,7 @@ const SummaryStats = mongoose.model('SummaryStats');
 module.exports = {
     getBlocktime: getBlocktime,
     getDifficulty: getDifficulty,
+    getPrices: getPrices,
 };
 
 /**
@@ -53,7 +55,6 @@ function getBlocktime(hours) {
  * @param hours
  */
 function getDifficulty(hours) {
-
     return new Promise((resolve, reject) => {
         //Current timestamp in seconds
         if (hours != null) {
@@ -86,4 +87,55 @@ function getDifficulty(hours) {
 
     })
 
+}
+
+
+function getPrices() {
+    return new Promise((resolve, reject) => {
+        requestify.get('https://stocks.exchange/api2/ticker')
+            .then(function (response) {
+                    let responseBody = response.getBody();
+
+                    let shfTicks = responseBody.filter(function (coinTicker) {
+                        return coinTicker.market_name === 'SHF_BTC';
+                    });
+
+                    if (shfTicks.length !== 1) {
+                        reject();
+                    }
+
+                    let shfTick = shfTicks[0];
+                    let shfBtcRate = parseFloat(shfTick.last);
+                    let shfBtcChange = parseFloat(shfTick.spread);
+                    requestify.get('https://bitpay.com/rates')
+                        .then(function (response) {
+                                let responseBody = response.getBody();
+
+                                let usdTickers = responseBody.data.filter(function (ticker) {
+                                    return ticker.code === 'USD';
+                                });
+
+                                if (usdTickers.length !== 1) {
+                                    reject();
+                                }
+
+                                let usdTicker = usdTickers[0];
+
+                                let btcUsdRate = usdTicker.rate;
+
+                                let result = {
+                                    shfBtcRate: shfBtcRate,
+                                    shfBtcChange: shfBtcChange,
+                                    btcUsdRate: btcUsdRate
+                                };
+                                resolve(result);
+                            }
+                        ).fail(function (error) {
+                        reject(error)
+                    })
+                }
+            ).fail(function (error) {
+            reject(error)
+        })
+    });
 }
