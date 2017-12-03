@@ -18,12 +18,6 @@ if (typeof web3 !== "undefined") {
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
-if (web3.isConnected())
-    console.log("Web3Service: Web3 connection established");
-else
-    throw "Web3Service: No connection";
-
-
 function getBalance(address) {
     return new Promise((resolve, reject) => {
         web3.eth.getBalance(address, function (err, result) {
