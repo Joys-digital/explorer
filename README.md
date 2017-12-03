@@ -39,3 +39,17 @@ This will delploy application on 3000 port
 `node app.js`
 
 Open http://127.0.0.1:3000/ to open shaft explorer
+
+
+
+## Docker
+
+To run inside docker, you should build it by your self, and run the container.
+If you want to run testnet explorer, simply set TESTNET=1 in start.sh
+
+
+```docker build -t shaftsh/explorer .```
+
+```docker run -d -p 8080:3000 --restart=always --name explorer shaftsh/explorer```
+
+This will expose explorer on port 8080. Be patient, explorer need some time to fetch blockchain.
