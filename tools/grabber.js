@@ -19,6 +19,11 @@ let initialized = false;
 
 let blocksFailedToFetch = [];
 
+let isDebug = false;
+
+mongoose.set('debug', false);
+
+
 /**
  * Fetches block from web3, checks that it DNE in DB, and insert them
  * @param number {number} high border to check (f.e. 0 -> number)
@@ -70,7 +75,9 @@ function writeTransactionToDB(transaction) {
                     err);
             }
         } else {
-            console.log('Transaction with hash ' + transaction.hash + ' successfully written in DB');
+            if (isDebug) {
+                console.log('Transaction with hash ' + transaction.hash + ' successfully written in DB');
+            }
         }
     });
 }
@@ -97,7 +104,7 @@ function fetchBlockBatch(blocks) {
 
     function errorCallback(error) {
         console.log('Failed to fetch block #' + blockNumber + ". Possibly web3 is bugging. Adding to unprocessed queue'");
-        if(blockNumber == undefined) {
+        if (blockNumber == undefined) {
             console.log('Ay');
         }
         blocksFailedToFetch.push(blockNumber);
@@ -135,12 +142,19 @@ function fetchBlock(i, lastBlock) {
     }
     web3.eth.getBlock(i, true, function (error, blockData) {
         if (!error) {
+
             //Checking that block is not exists in DB
             //If not, then write it to DB
             Block.find({number: i}, function (err, b) {
+                if(i % 200 == 0) {
+                    console.log('Processing block #' + i);
+                }
+
                 if (b.length == 0) {
-                    console.log('Block number ' + i + ' does not exists in DB, processing');
-                    console.log('Saving block #' + i + ' to DB');
+                    if(isDebug) {
+                        console.log('Block number ' + i + ' does not exists in DB, processing');
+                        console.log('Saving block #' + i + ' to DB');
+                    }
                     writeBlockToDB(blockData);
 
                 } else {
@@ -159,7 +173,7 @@ function fetchBlock(i, lastBlock) {
         }
         else {
             console.log('Could not get block #' + i + ". Adding it as failed block to unprocessed pool");
-            if(i == undefined) {
+            if (i == undefined) {
                 console.log('Ay');
             }
             blocksFailedToFetch.push(i);
@@ -228,7 +242,7 @@ var listenBlocks = function () {
                     console.log('Succefully added fresh block to database');
                 }, function (error) {
                     console.log('Failed to add fresh block to DB, adding to unprocessed queue');
-                    if(blockData.number == undefined) {
+                    if (blockData.number == undefined) {
                         console.log('Ay');
                     }
                     blocksFailedToFetch.push(blockData.number);
