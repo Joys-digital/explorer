@@ -14,7 +14,7 @@ chown explorer:explorer /opt/geth_datadir
 
 #NodeJS
 cd /tmp
-curl -o node.tar.xz https://nodejs.org/dist/v8.9.0/node-v8.9.0-linux-x64.tar.xz
+curl -o node.tar.xz https://nodejs.org/dist/latest-v9.x/node-v9.2.0-linux-x64.tar.xz
 tar -C /usr/local --strip-components 1 -xf node.tar.xz
 rm node.tar.xz
 cd /opt
