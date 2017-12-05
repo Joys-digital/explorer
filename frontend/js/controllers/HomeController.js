@@ -61,7 +61,7 @@ angular.module('BlocksApp')
                 $http.get('api/stats')
                     .then(function (res) {
                         if (res.data.price != null) {
-                            scope.stats.price = Math.round(res.data.price*100)/100;
+                            scope.stats.price = Math.round(res.data.price*1000)/1000;
                         }
                         if (res.data.priceChange24hr != null) {
                             scope.stats.priceChange24hr = Math.round(res.data.priceChange24hr);
