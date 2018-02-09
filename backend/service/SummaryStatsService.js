@@ -130,7 +130,7 @@ function getPrices() {
                                 // };
                                 let result = {
                                     shfBtcRate: 1.0,
-                                    shfBtcChange: 0,
+                                    shfBtcChange: 0.0,
                                     btcUsdRate: 0.01
                                 };
                                 resolve(result);
