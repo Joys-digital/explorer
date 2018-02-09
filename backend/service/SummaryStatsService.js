@@ -123,10 +123,15 @@ function getPrices() {
 
                                 let btcUsdRate = usdTicker.rate;
 
+                                // let result = {
+                                //     shfBtcRate: shfBtcRate,
+                                //     shfBtcChange: shfBtcChange,
+                                //     btcUsdRate: btcUsdRate
+                                // };
                                 let result = {
-                                    shfBtcRate: shfBtcRate,
-                                    shfBtcChange: shfBtcChange,
-                                    btcUsdRate: btcUsdRate
+                                    shfBtcRate: 1.0,
+                                    shfBtcChange: 0,
+                                    btcUsdRate: 0.01
                                 };
                                 resolve(result);
                             }
